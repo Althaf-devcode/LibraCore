@@ -122,12 +122,8 @@ INSERT INTO `students`
 (2,  'STU-1002', 'Rahul Sharma',    'rahul.sharma@student.libracore.edu',    '+94 77 252 7552', '88 Lake Avenue, Riverton',        'Information Technology',   1, '2026-05-06 10:30:00', '2026-05-06 10:30:00'),
 (3,  'STU-1003', 'Emily Chen',      'emily.chen@student.libracore.edu',      '+94 75 453 8555', '45 Cedar Lane, Fairview',         'Mathematics',              2, '2026-05-09 11:45:00', '2026-05-09 11:45:00'),
 (4,  'STU-1004', 'Michael Okafor',  'michael.okafor@student.libracore.edu',  '+94 72 332 2542', '230 Elm Road, Bridgeport',        'Electrical Engineering',   4, '2026-05-12 14:20:00', '2026-05-12 14:20:00'),
-(5,  'STU-1005', 'Sofia Ramirez',   'sofia.ramirez@student.libracore.edu',   '+94 75 952 8222', '17 Birch Court, Oakdale',         'Physics',                  1, '2026-05-15 09:50:00', '2026-05-15 09:50:00'),
-(6,  'STU-1006', 'David Kim',       'david.kim@student.libracore.edu',       '+94 77 652 6773', '301 Willow Way, Brookside',       'Business Administration',  2, '2026-05-18 13:05:00', '2026-05-18 13:05:00'),
-(7,  'STU-1007', 'Fatima Noor',     'fatima.noor@student.libracore.edu',     '+94 72 342 5556', '74 Aspen Drive, Hillcrest',       'Computer Science',         4, '2026-05-22 10:10:00', '2026-05-22 10:10:00'),
-(8,  'STU-1008', "Liam O'Brien",    'liam.obrien@student.libracore.edu',     '+94 77 739 9995', '5 Chestnut Plaza, Lakeside',      'Mechanical Engineering',   3, '2026-05-27 15:35:00', '2026-05-27 15:35:00'),
-(9,  'STU-1009', 'Priya Patel',     'priya.patel@student.libracore.edu',     '+94 77 656 7894', '129 Sycamore Street, Greenfield', 'Information Technology',   2, '2026-06-02 09:25:00', '2026-06-02 09:25:00'),
-(10, 'STU-1010', 'Ethan Walsh',     'ethan.walsh@student.libracore.edu',     '+94 75 555 2355', '62 Poplar Bend, Stonebridge',     'Electronics',              1, '2026-06-08 11:55:00', '2026-06-08 11:55:00');
+(5,  'STU-1005', 'Sofia Ramirez',   'sofia.ramirez@student.libracore.edu',   '+94 75 952 8222', '17 Birch Court, Oakdale',         'Physics',                  1, '2026-05-15 09:50:00', '2026-05-15 09:50:00');
+
 
 -- -------------------------------------------------------------
 -- Demo data: books
