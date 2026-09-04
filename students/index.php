@@ -25,7 +25,7 @@ $totalPages = max(1, (int)ceil($totalRows / $perPage));
 $page       = min($page, $totalPages);
 $offset     = ($page - 1) * $perPage;
 
-$stmt = $pdo->prepare("SELECT * FROM students $whereSql ORDER BY created_at DESC, id DESC LIMIT $perPage OFFSET $offset");
+$stmt = $pdo->prepare("SELECT * FROM students $whereSql ORDER BY student_id ASC LIMIT $perPage OFFSET $offset");
 $stmt->execute($params);
 $students = $stmt->fetchAll();
 
@@ -38,7 +38,7 @@ include __DIR__ . '/../includes/header.php';
         <p class="mt-1 text-sm text-slate-500">Add, view, update and remove student records.</p>
     </div>
     <a href="<?= url('students/add.php') ?>"
-       class="inline-flex w-fit items-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm shadow-blue-600/30 transition hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">
+        class="inline-flex w-fit items-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm shadow-blue-600/30 transition hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">
         <?= icon('plus', 'h-4 w-4') ?> Add Student
     </a>
 </div>
@@ -47,7 +47,7 @@ include __DIR__ . '/../includes/header.php';
     <div class="relative flex-1">
         <span class="pointer-events-none absolute inset-y-0 left-3 flex items-center text-slate-400"><?= icon('search', 'h-4 w-4') ?></span>
         <input type="text" name="q" value="<?= e($q) ?>" placeholder="Search by student ID, name, email or department..."
-               class="w-full rounded-lg border border-slate-300 py-2.5 pl-10 pr-3 text-sm shadow-sm transition focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100">
+            class="w-full rounded-lg border border-slate-300 py-2.5 pl-10 pr-3 text-sm shadow-sm transition focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100">
     </div>
     <div class="flex gap-2">
         <button type="submit" class="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700">
@@ -91,23 +91,33 @@ include __DIR__ . '/../includes/header.php';
                 <?php else: ?>
                     <?php foreach ($students as $s): ?>
                         <tr class="transition hover:bg-blue-50/40">
-                            <td class="px-5 py-3.5"><span class="rounded-md bg-blue-50 px-2 py-0.5 text-xs font-bold text-blue-700"><?= e($s['student_id']) ?></span></td>
+                            <td class="px-5 py-3.5 whitespace-nowrap">
+    <span class="rounded-md bg-blue-50 px-2 py-0.5 text-xs font-bold text-blue-700">
+        <?= e($s['student_id']) ?>
+    </span>
+</td>
                             <td class="px-5 py-3.5 font-semibold text-slate-800"><?= e($s['name']) ?></td>
                             <td class="px-5 py-3.5 text-slate-600"><?= e($s['email']) ?></td>
-                            <td class="px-5 py-3.5 text-slate-600"><?= e($s['phone']) ?></td>
+                            <td class="px-5 py-3.5 whitespace-nowrap text-slate-600">
+                                <?= e($s['phone']) ?>
+                            </td>
                             <td class="px-5 py-3.5 text-slate-600"><?= e($s['department']) ?></td>
-                            <td class="px-5 py-3.5"><span class="inline-flex h-7 min-w-[1.75rem] items-center justify-center rounded-full bg-indigo-50 px-2 text-xs font-bold text-indigo-700">Year <?= (int)$s['year'] ?></span></td>
+                            <td class="px-5 py-3.5 whitespace-nowrap">
+                                <span class="inline-flex h-7 min-w-[1.75rem] items-center justify-center rounded-full bg-indigo-50 px-2 text-xs font-bold text-indigo-700">
+                                    Year <?= (int)$s['year'] ?>
+                                </span>
+                            </td>
                             <td class="px-5 py-3.5 whitespace-nowrap text-slate-500"><?= e(date('M j, Y', strtotime($s['created_at']))) ?></td>
                             <td class="px-5 py-3.5">
                                 <div class="flex items-center justify-end gap-1.5">
                                     <a href="<?= url('students/view.php?id=' . (int)$s['id']) ?>" title="View" aria-label="View student"
-                                       class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-blue-600 transition hover:bg-blue-100"><?= icon('eye', 'h-4 w-4') ?></a>
+                                        class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-blue-600 transition hover:bg-blue-100"><?= icon('eye', 'h-4 w-4') ?></a>
                                     <a href="<?= url('students/edit.php?id=' . (int)$s['id']) ?>" title="Edit" aria-label="Edit student"
-                                       class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-amber-50 text-amber-600 transition hover:bg-amber-100"><?= icon('edit', 'h-4 w-4') ?></a>
+                                        class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-amber-50 text-amber-600 transition hover:bg-amber-100"><?= icon('edit', 'h-4 w-4') ?></a>
                                     <form method="post" action="<?= url('students/delete.php') ?>" data-confirm="Delete student &quot;<?= e($s['name']) ?> (<?= e($s['student_id']) ?>)&quot;? This cannot be undone.">
                                         <input type="hidden" name="id" value="<?= (int)$s['id'] ?>">
                                         <button type="submit" title="Delete" aria-label="Delete student"
-                                                class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-red-50 text-red-600 transition hover:bg-red-100"><?= icon('trash', 'h-4 w-4') ?></button>
+                                            class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-red-50 text-red-600 transition hover:bg-red-100"><?= icon('trash', 'h-4 w-4') ?></button>
                                     </form>
                                 </div>
                             </td>
